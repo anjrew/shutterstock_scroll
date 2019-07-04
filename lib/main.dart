@@ -15,12 +15,12 @@ class MyApp extends StatelessWidget {
         return ScopedModel(
             model: _model,
             child: new MaterialApp(
-        title: 'Shutterstock Scroll',
-        theme: ThemeData(
-                primarySwatch: Colors.red,
-            ),
-        home: Gallery()
-        )
+                title: 'Shutterstock Scroll',
+                theme: ThemeData(
+                        primarySwatch: Colors.red,
+                    ),
+                home: Gallery()
+            )
         );
     }
 }

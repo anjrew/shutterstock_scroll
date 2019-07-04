@@ -8,9 +8,10 @@ import 'dart:convert';
 class MainBloc extends Model {
 
     List<ImageData> photoData;
+    int pageNumber = 1;
     
     MainBloc(){
-        getimages()
+        getimages(pageNumber)
             .then((result) {  
                 photoData = result;
                 notifyListeners();
@@ -18,7 +19,7 @@ class MainBloc extends Model {
             .catchError((e) => print(e));
     }
 
-    Future<dynamic> getimages()async{
+    Future<dynamic> getimages(page)async{
         var result;
         try {
             String ssClientId = "51edc-bf697-a8382-7b9fa-91743-1d438";
@@ -26,11 +27,15 @@ class MainBloc extends Model {
             String credentials = "$ssClientId:$ssConsumerSecret";
             String encodedCredentials = base64.encode(utf8.encode(credentials));
             String authString = 'Basic $encodedCredentials';
-            Response response = await http.get('https://api.shutterstock.com/v2/images/search',
-            headers: { 'Authorization' :  authString });
+            String amountPerPage = 'per_page=${5}';
+            String pageNumberQuery = "page=$page";
+            String uri = 'https://api.shutterstock.com/v2/images/search?$amountPerPage&&$pageNumberQuery';
+            Response response = await http.get(uri, headers: { 'Authorization' :  authString });
+
             if (response.statusCode == 200){
                 Map<String,dynamic> responseData = jsonDecode(response.body);
                 result = resToImageData(responseData["data"]);
+                pageNumber++;
             } else {
                 throw Exception('The GET request failed with code ${response.statusCode}');
             }
@@ -38,6 +43,16 @@ class MainBloc extends Model {
             print(e);
         }
         return result;
+    }
+
+    void getMoreImages()async{
+        try {
+            photoData.addAll(await getimages(pageNumber));
+            pageNumber++;
+            notifyListeners();
+        } catch (e) {
+            print(e);
+        }
     }
 
     List<ImageData> resToImageData(List<dynamic> data){
