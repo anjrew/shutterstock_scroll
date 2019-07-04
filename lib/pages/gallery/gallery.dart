@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shutterstock_scroll/pages/gallery/widgets/app_bar.dart';
+import 'package:shutterstock_scroll/pages/gallery/widgets/gallery_list.dart';
 
 class Gallery extends StatelessWidget {
 
@@ -11,6 +12,7 @@ class Gallery extends StatelessWidget {
 
                 GalleryAppBar(),
 
+                GalleryList()
 
             ]
         )

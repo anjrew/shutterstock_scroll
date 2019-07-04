@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shutterstock_scroll/classes/image_data.dart';
+import 'package:scoped_model/scoped_model.dart';
 import 'package:shutterstock_scroll/logic/main_bloc.dart';
 import 'package:shutterstock_scroll/pages/gallery/widgets/square_image.dart';
 
@@ -11,30 +13,31 @@ class GalleryList extends StatefulWidget {
 class _GalleryListState extends State<GalleryList> {
 
     ScrollController _controller = new ScrollController();
-
+    
     @override
     Widget build(BuildContext context) {
-        return GridView.builder(
-            controller: _controller,
-            shrinkWrap: true,
-            cacheExtent: 10,
-            physics: ScrollPhysics(),
-            itemCount: MainBloc.of(context).photoData.length,
-            key: UniqueKey(),
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: context.size.width / 4,
-                mainAxisSpacing: 5.0,
-                crossAxisSpacing: 5.0,
-                childAspectRatio: 1.0,
-            ),
-            itemBuilder: (BuildContext context, int index) {
-                    return  SquareImage(
-                        heroTag: '_herotag',
-                        imageUrl: '',
-                        placeholder: '',
-                    );
-                }
-        );
+
+        return ScopedModelDescendant<MainBloc>(builder: (BuildContext context, Widget _, MainBloc model){
+
+            List<ImageData>  _photoData = model.photoData;
+
+            return _photoData != null ? SliverGrid(
+                key: UniqueKey(),
+                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 300,
+                    mainAxisSpacing: 5.0,
+                    crossAxisSpacing: 5.0,
+                    childAspectRatio: 1.0,
+                ),
+                delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                            ImageData imageData = _photoData[index];
+                            return  SquareImage(imageData);
+                    },
+                    childCount: _photoData.length
+                )): SliverToBoxAdapter(child:Center(child: CircularProgressIndicator(),));
+
+        });
     }
 }
         
