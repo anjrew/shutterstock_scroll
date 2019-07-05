@@ -1,21 +1,18 @@
-import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:shutterstock_scroll/classes/image_data.dart';
-import 'package:shutterstock_scroll/pages/gallery/image_view/image_view.dart';
 
-class SquareImage extends StatelessWidget {
-  final ImageData _imageData;
-  
-  const SquareImage(this._imageData);
+class ImageView extends StatelessWidget {
 
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-        onTap: () => Navigator.push(context, new MaterialPageRoute(
-                builder: (BuildContext context) => ImageView(_imageData), 
-                fullscreenDialog: true)),
-        child: Hero(
+    final ImageData _imageData;
+
+    const ImageView(this._imageData);
+    @override
+    Widget build(BuildContext context) {
+        return Scaffold(
+            appBar: AppBar(),
+            body: Hero(
             key: UniqueKey(),
             tag: _imageData.id,
             child: CachedNetworkImage(
@@ -28,5 +25,5 @@ class SquareImage extends StatelessWidget {
               imageUrl: _imageData.url,
               fit: BoxFit.cover,
             )));
-    }
+    }   
 }
