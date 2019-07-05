@@ -27,7 +27,7 @@ class MainBloc extends Model {
             String credentials = "$ssClientId:$ssConsumerSecret";
             String encodedCredentials = base64.encode(utf8.encode(credentials));
             String authString = 'Basic $encodedCredentials';
-            String amountPerPage = 'per_page=${5}';
+            String amountPerPage = 'per_page=${10}';
             String pageNumberQuery = "page=$page";
             String uri = 'https://api.shutterstock.com/v2/images/search?$amountPerPage&&$pageNumberQuery';
             Response response = await http.get(uri, headers: { 'Authorization' :  authString });
