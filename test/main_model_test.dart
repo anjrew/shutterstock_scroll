@@ -11,5 +11,5 @@ void main() {
         expect(model.pageNumber, 1);
     });
 
-    test(description, body)
+    test('Get mpore images increments', body)
 }
