@@ -29,7 +29,7 @@ class ErrorMessageWidget extends StatelessWidget {
             content: Text(message),
             contentPadding: EdgeInsets.all(20),
             actions: <Widget>[ 
-                MaterialButton(child: Text('ok'), 
+                MaterialButton(child: Text('OK'), 
                 onPressed: okAction)
                 ],
         );

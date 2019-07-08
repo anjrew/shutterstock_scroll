@@ -3,13 +3,23 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
 
-class MockClient extends Mock implements http.Client {}
+class MockHttp extends Mock implements http.Client {}
 
 void main() {
+    final mockHttp = MockHttp();
+    final model = MainModel();
+
     test('Counter value should be incremented', () {
-        final model = MainModel();
+
         expect(model.pageNumber, 1);
+
     });
 
-    test('Get mpore images increments', body)
+    test('Get more images increments', (){
+        when(mockHttp.get('https://api.shutterstock.com/v2/images/search?per_page=10&&page=1'))
+                .thenAnswer((Invocation invocation) 
+                    async => http.Response('This is a JSON',200));
+
+        expect(model.getimages(1), isFlutterError);
+    });
 }

@@ -28,7 +28,10 @@ class _MainPageState extends State<MainPage> {
                 body: CustomScrollView(controller: _controller, slivers: <Widget>[
                 GalleryAppBar(),
                 logic.error != null
-                    ? SliverToBoxAdapter(child: ErrorMessageWidget(message: logic.error))
+                    ? SliverToBoxAdapter(child: 
+                        ErrorMessageWidget(
+                            message: logic.error,
+                            okAction: ()=> logic.error = null))
                     : GalleryList(),
             ]));
             });
