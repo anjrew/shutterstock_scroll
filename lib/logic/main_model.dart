@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:shutterstock_scroll/classes/image_data.dart';
 import 'dart:convert';
 
 class MainModel extends Model {
+
+    Client client = Client();
 
     List<ImageData> photoData;
     int pageNumber = 1;
@@ -34,7 +35,7 @@ class MainModel extends Model {
             String amountPerPage = 'per_page=${10}';
             String pageNumberQuery = "page=$page";
             String uri = 'https://api.shutterstock.com/v2/images/search?$amountPerPage&&$pageNumberQuery';
-            Response response = await http.get(uri, headers: { 'Authorization' :  authString })
+            Response response = await client.get(uri, headers: { 'Authorization' :  authString })
                 .timeout(Duration(seconds: 10));
 
             if (response.statusCode == 200){

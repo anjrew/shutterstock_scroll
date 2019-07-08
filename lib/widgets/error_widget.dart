@@ -8,19 +8,6 @@ class ErrorMessageWidget extends StatelessWidget {
 
     const ErrorMessageWidget({@required this.message, @required this.okAction});
 
-    // @override
-    // Widget build(BuildContext context) {
-    //     return Container(
-    //     child: Column(children: <Widget>[
-    //         Text("Error"),
-    //         Text(message),
-    //         FlatButton(
-    //             child: Text("Ok"),
-    //             onPressed: () => Navigator.pop(context))
-    //     ],),
-    //     );
-    // }
-
     @override
     Widget build(BuildContext context) {
         return AlertDialog(
