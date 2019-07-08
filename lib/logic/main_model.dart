@@ -53,7 +53,6 @@ class MainModel extends Model {
         } catch (e) {
             displayError(e);
         }
-        print("page number is $pageNumber");
         return result;
     }
 

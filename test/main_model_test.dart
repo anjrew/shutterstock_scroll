@@ -10,15 +10,12 @@ import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 
-
 class MockHttp extends Mock implements http.Client {}
 
-
-void main()async{
-    
-    // http.Client mockHttp = MockHttp();
-    http.Client mockHttp = MockClient((request) async{
-        return Response('''
+void main() async {
+  // http.Client mockHttp = MockHttp();
+  http.Client mockHttp = MockClient((request) async {
+    return Response('''
                   {
                     "data": [
                         {
@@ -50,28 +47,25 @@ void main()async{
                         }
                     ]
                 }
-            ''', 
-                200);
+            ''', 200);
+  });
 
-    });
-    
-    final model = MainModel(httpClient: mockHttp);
+  final model = MainModel(httpClient: mockHttp);
 
+  test('Get more images increments', () async {
+    List<ImageData> mockedResult = await model.getimages(1);
 
-    test('Get more images increments', () async {
-
-        List<ImageData> mockedResult = await model.getimages(1);
-
-        expect(mockedResult[0], new TypeMatcher<ImageData>()
+    expect(
+        mockedResult[0],
+        new TypeMatcher<ImageData>()
             .having((ImageData data) => data.id, 'id', equals("257290"))
-            .having((ImageData data) => data.url, 'url', equals("http://saohiazo.jp/mup"))
-            .having((ImageData data) => data.description, 'description', equals("Ace nibnofrik hin c."))
-        );
-    });
+            .having((ImageData data) => data.url, 'url',
+                equals("http://saohiazo.jp/mup"))
+            .having((ImageData data) => data.description, 'description',
+                equals("Ace nibnofrik hin c.")));
+  });
 
-    test('Counter value should be incremented', () {
-            expect(model.pageNumber, 3);
-        });
-
-    // verify(mockHttp.get(any)).called(2);
+  test('Counter value should be incremented', () {
+    expect(model.pageNumber, 3);
+  });
 }
