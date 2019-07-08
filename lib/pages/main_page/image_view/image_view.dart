@@ -16,14 +16,14 @@ class ImageView extends StatelessWidget {
             key: UniqueKey(),
             tag: _imageData.id,
             child: CachedNetworkImage(
-              placeholder: (BuildContext context, String string) =>  Shimmer.fromColors(
-                      baseColor: Colors.white,
-                      highlightColor: Colors.grey,
-                      child: Container( color: Colors.white54,)),
-              errorWidget: (BuildContext context, String message, Object error) =>
-                  Image.asset('assets/placeholder.png', key: Key('placeholder' + _imageData.id)),
-              imageUrl: _imageData.url,
-              fit: BoxFit.cover,
+                placeholder: (BuildContext context, String string) =>  Shimmer.fromColors(
+                        baseColor: Colors.white,
+                        highlightColor: Colors.grey,
+                        child: Container( color: Colors.white54,)),
+                errorWidget: (BuildContext context, String message, Object error) =>
+                    Image.asset('assets/placeholder.png', key: Key('placeholder' + _imageData.id)),
+                imageUrl: _imageData.url,
+                fit: BoxFit.cover,
             )));
     }   
 }

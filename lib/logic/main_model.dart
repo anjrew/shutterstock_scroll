@@ -7,13 +7,13 @@ import 'package:http/http.dart';
 import 'package:shutterstock_scroll/classes/image_data.dart';
 import 'dart:convert';
 
-class MainBloc extends Model {
+class MainModel extends Model {
 
     List<ImageData> photoData;
     int pageNumber = 1;
     String error;
     
-    MainBloc(){
+    MainModel(){
         getimages(pageNumber)
             .then((result) {  
                 photoData = result;
@@ -80,5 +80,5 @@ class MainBloc extends Model {
         ).toList();
     }
     
-    static MainBloc of(BuildContext context) => ScopedModel.of<MainBloc>(context);
+    static MainModel of(BuildContext context) => ScopedModel.of<MainModel>(context);
 }

@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shutterstock_scroll/classes/image_data.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:shutterstock_scroll/logic/main_bloc.dart';
-import 'package:shutterstock_scroll/pages/gallery/widgets/square_image.dart';
+import 'package:shutterstock_scroll/logic/main_model.dart';
+import 'package:shutterstock_scroll/pages/main_page/widgets/square_image.dart';
 
 
 class GalleryList extends StatelessWidget {
@@ -11,9 +11,9 @@ class GalleryList extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
 
-        return ScopedModelDescendant<MainBloc>(
+        return ScopedModelDescendant<MainModel>(
             rebuildOnChange: true,
-            builder: (BuildContext context, Widget _, MainBloc model){
+            builder: (BuildContext context, Widget _, MainModel model){
 
             List<ImageData>  _photoData = model.photoData;
 

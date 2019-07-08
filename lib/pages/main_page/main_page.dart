@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:shutterstock_scroll/logic/main_bloc.dart';
-import 'package:shutterstock_scroll/pages/gallery/widgets/app_bar.dart';
-import 'package:shutterstock_scroll/pages/gallery/widgets/gallery_list.dart';
+import 'package:shutterstock_scroll/logic/main_model.dart';
+import 'package:shutterstock_scroll/pages/main_page/widgets/app_bar.dart';
+import 'package:shutterstock_scroll/pages/main_page/widgets/gallery_list.dart';
 
-class Gallery extends StatefulWidget {
+class MainPage extends StatefulWidget {
   @override
-  _GalleryState createState() => _GalleryState();
+  _MainPageState createState() => _MainPageState();
 }
 
-class _GalleryState extends State<Gallery> {
+class _MainPageState extends State<MainPage> {
 
      ScrollController _controller = new ScrollController();
 
@@ -20,7 +20,7 @@ class _GalleryState extends State<Gallery> {
 
     @override
     Widget build(BuildContext context) {
-        MainBloc logic = MainBloc.of(context);
+        MainModel logic = MainModel.of(context);
         return Scaffold(
             body: CustomScrollView(
                 controller: _controller,
@@ -39,7 +39,7 @@ class _GalleryState extends State<Gallery> {
         double position = _controller.position.pixels;
         double maxExtent = _controller.position.maxScrollExtent;
         if (position >= maxExtent){
-            MainBloc.of(context).getMoreImages();
+            MainModel.of(context).getMoreImages();
         }
     }
 

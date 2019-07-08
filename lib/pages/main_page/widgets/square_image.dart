@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:shutterstock_scroll/classes/image_data.dart';
-import 'package:shutterstock_scroll/pages/gallery/image_view/image_view.dart';
+import 'package:shutterstock_scroll/pages/main_page/image_view/image_view.dart';
 
 class SquareImage extends StatelessWidget {
   final ImageData _imageData;
