@@ -17,7 +17,7 @@ class MockHttp extends Mock implements http.Client {}
 
 void main()async{
     final model = MainModel();
-    http.Client mockHttp = MockClient((Request request) =>  Future.value(Response('''
+    http.Client mockHttp = MockClient((Request request) => Future.value(Response('''
                 {
                 "data": [
                     {
