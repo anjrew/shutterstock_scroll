@@ -7,9 +7,10 @@ import 'package:shutterstock_scroll/logic/main_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
+// import 'package:http/http.dart';
 
 class MockHttp extends Mock implements http.Client {}
+
 
 void main() {
     http.Client mockHttp = MockHttp();
@@ -31,7 +32,7 @@ void main() {
         //         .thenAnswer((_) => Future.value(Response(jsonData, 200)));
 
            
-            when(mockHttp.get('https://api.shutterstock.com/v2/images/search?per_page=10&&page=1'))
+            when(mockHttp.get('https://api.shutterstock.com/v2/images/search?per_page=10&&page=0'))
                 .thenAnswer((_) => Future.value(Response('''
                 {
                 "data": [
@@ -61,7 +62,7 @@ void main() {
         expect(mockedResult[0], new TypeMatcher<ImageData>()
             .having((ImageData data) => data.id, 'id', equals(257290))
             .having((ImageData data) => data.url, 'url', equals("http://saohiazo.jp/mup"))
-            .having((ImageData data) => data.url, 'url', equals("Ace nibnofrik hin ita afcaz zez mub lew dudotep ekitoco tamnij oj jezesi kujut kawzikuf ukrigrej lunefub jeom. Mazojatu so ak fahzilic pozus emenu rudhuv olarih wewapga nukve hapus wocat la sup wospefah. Tu binas zecucko ah unpelmih vevbej vubuoro wi ka wikin betores momkelbi. Souwva jura oziforho pame kewzejtu ja huju lon mes zegag nocpobez huka. Uvtukfab zughozeh iniwudni fu uzewes hitdutzob sijo kosij afe vauru ozgibpos rurwac morja licbavze gurwatwev. We dofra rohotuz kag vet kefga hih hifesuh higejnet nokjob joupo zaw finusiw doge vi opiahuec"))
+            .having((ImageData data) => data.description, 'description', equals("Ace nibnofrik hin ita afcaz zez mub lew dudotep ekitoco tamnij oj jezesi kujut kawzikuf ukrigrej lunefub jeom. Mazojatu so ak fahzilic pozus emenu rudhuv olarih wewapga nukve hapus wocat la sup wospefah. Tu binas zecucko ah unpelmih vevbej vubuoro wi ka wikin betores momkelbi. Souwva jura oziforho pame kewzejtu ja huju lon mes zegag nocpobez huka. Uvtukfab zughozeh iniwudni fu uzewes hitdutzob sijo kosij afe vauru ozgibpos rurwac morja licbavze gurwatwev. We dofra rohotuz kag vet kefga hih hifesuh higejnet nokjob joupo zaw finusiw doge vi opiahuec"))
         );
     });
 }
