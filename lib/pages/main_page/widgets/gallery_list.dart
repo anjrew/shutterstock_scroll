@@ -28,11 +28,12 @@ class GalleryList extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
                             ImageData imageData = _photoData[index];
-                            return  SquareImage(imageData);
+                            return SquareImage(imageData);
                     },
                     childCount: _photoData.length
                 )): SliverToBoxAdapter(
-                        child: Container( 
+                        child: Container(
+                            height: MediaQuery.of(context).size.height, 
                             alignment: Alignment(0, 0),   
                             child: CircularProgressIndicator(),));
         });
