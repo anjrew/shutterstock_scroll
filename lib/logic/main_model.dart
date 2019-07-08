@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:shutterstock_scroll/classes/image_data.dart';
 import 'dart:convert';
@@ -11,8 +10,10 @@ class MainModel extends Model {
     List<ImageData> photoData;
     int pageNumber = 1;
     String error;
+    Client httpClient;
     
-    MainModel(){
+    MainModel({@required this.httpClient}){
+
         getimages(pageNumber)
             .then((result) {  
                 photoData = result;
@@ -20,10 +21,11 @@ class MainModel extends Model {
             })
             .catchError((e) { 
                 displayError(e);
-            });
+            })
+            .timeout(Duration(seconds: 10));;
     }
 
-    Future<dynamic> getimages(page)async{
+    Future<List<ImageData>> getimages(page)async{
         var result;
         try {
             String ssClientId = "51edc-bf697-a8382-7b9fa-91743-1d438";
@@ -34,8 +36,8 @@ class MainModel extends Model {
             String amountPerPage = 'per_page=${10}';
             String pageNumberQuery = "page=$page";
             String uri = 'https://api.shutterstock.com/v2/images/search?$amountPerPage&&$pageNumberQuery';
-            Response response = await http.get(uri, headers: { 'Authorization' :  authString })
-                .timeout(Duration(seconds: 10));
+            
+            Response response = await httpClient.get(uri, headers: { 'Authorization' :  authString });
 
             if (response.statusCode == 200){
                 Map<String,dynamic> responseData = jsonDecode(response.body);
@@ -51,12 +53,13 @@ class MainModel extends Model {
         } catch (e) {
             displayError(e);
         }
+        print("page number is $pageNumber");
         return result;
     }
 
     void getMoreImages()async{
         try {
-            photoData.addAll(await getimages(pageNumber));
+            photoData.addAll(await getimages(pageNumber).timeout(Duration(seconds: 10)));
             notifyListeners();
         } catch (e) {
             displayError(e);
@@ -64,12 +67,11 @@ class MainModel extends Model {
     }
 
     List<ImageData> resToImageData(List<dynamic> data){
-
-        return data.map((dynamic imageData)=> new ImageData(
-                url: imageData['assets']['huge_thumb']['url'],
-                description: imageData['description'],
-                id: imageData['id']
-            )
+        return data.map((dynamic imageData) => new ImageData(
+                    url: imageData['assets']['huge_thumb']['url'],
+                    description: imageData['description'],
+                    id: imageData['id']
+                )
         ).toList();
     }
 
