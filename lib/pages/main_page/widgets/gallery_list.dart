@@ -35,7 +35,6 @@ class GalleryList extends StatelessWidget {
                         child: Container( 
                             alignment: Alignment(0, 0),   
                             child: CircularProgressIndicator(),));
-
         });
     }
 }

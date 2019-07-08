@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:http/http.dart' as http;
@@ -19,7 +18,9 @@ class MainModel extends Model {
                 photoData = result;
                 notifyListeners();
             })
-            .catchError((e) => print(e));
+            .catchError((e) { 
+                displayError(e);
+            });
     }
 
     Future<dynamic> getimages(page)async{
@@ -48,13 +49,7 @@ class MainModel extends Model {
                 throw Exception('The GET request failed with code ${response.statusCode}');
             }
         } catch (e) {
-            if (e is TimeoutException){
-                this.error = e.message;
-                notifyListeners();
-                print(e);
-            } else {
-                print(e);
-            }
+            displayError(e);
         }
         return result;
     }
@@ -64,9 +59,7 @@ class MainModel extends Model {
             photoData.addAll(await getimages(pageNumber));
             notifyListeners();
         } catch (e) {
-            this.error = e.toString();
-            notifyListeners();
-            print(e);
+            displayError(e);
         }
     }
 
@@ -78,6 +71,12 @@ class MainModel extends Model {
                 id: imageData['id']
             )
         ).toList();
+    }
+
+    void displayError(e){
+        this.error = e.toString();
+        notifyListeners();
+        print(e);
     }
     
     static MainModel of(BuildContext context) => ScopedModel.of<MainModel>(context);

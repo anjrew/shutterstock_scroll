@@ -28,7 +28,10 @@ class _MainPageState extends State<MainPage> {
 
                     GalleryAppBar(),
 
-                    logic.error != null ? ErrorWidget(logic.error) : GalleryList(),
+                    logic.error != null ? 
+                        SliverToBoxAdapter(
+                            child: ErrorWidget(logic.error)) 
+                        : GalleryList(),
 
                 ]
             )
