@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:http/http.dart' as http;
@@ -9,6 +11,7 @@ class MainBloc extends Model {
 
     List<ImageData> photoData;
     int pageNumber = 1;
+    String error;
     
     MainBloc(){
         getimages(pageNumber)
@@ -30,17 +33,28 @@ class MainBloc extends Model {
             String amountPerPage = 'per_page=${10}';
             String pageNumberQuery = "page=$page";
             String uri = 'https://api.shutterstock.com/v2/images/search?$amountPerPage&&$pageNumberQuery';
-            Response response = await http.get(uri, headers: { 'Authorization' :  authString });
+            Response response = await http.get(uri, headers: { 'Authorization' :  authString })
+                .timeout(Duration(seconds: 10));
 
             if (response.statusCode == 200){
                 Map<String,dynamic> responseData = jsonDecode(response.body);
-                result = resToImageData(responseData["data"]);
-                pageNumber++;
+                if (responseData["data"] != null){
+                    result = resToImageData(responseData["data"]);
+                    pageNumber++;
+                } else {
+                    throw Exception("The respose data was null");
+                }
             } else {
                 throw Exception('The GET request failed with code ${response.statusCode}');
             }
         } catch (e) {
-            print(e);
+            if (e is TimeoutException){
+                this.error = e.message;
+                notifyListeners();
+                print(e);
+            } else {
+                print(e);
+            }
         }
         return result;
     }
@@ -48,14 +62,16 @@ class MainBloc extends Model {
     void getMoreImages()async{
         try {
             photoData.addAll(await getimages(pageNumber));
-            pageNumber++;
             notifyListeners();
         } catch (e) {
+            this.error = e.toString();
+            notifyListeners();
             print(e);
         }
     }
 
     List<ImageData> resToImageData(List<dynamic> data){
+
         return data.map((dynamic imageData)=> new ImageData(
                 url: imageData['assets']['huge_thumb']['url'],
                 description: imageData['description'],

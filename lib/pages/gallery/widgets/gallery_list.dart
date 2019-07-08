@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shutterstock_scroll/classes/image_data.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -30,7 +31,10 @@ class GalleryList extends StatelessWidget {
                             return  SquareImage(imageData);
                     },
                     childCount: _photoData.length
-                )): SliverToBoxAdapter(child:Center(child: CircularProgressIndicator(),));
+                )): SliverToBoxAdapter(
+                        child: Container( 
+                            alignment: Alignment(0, 0),   
+                            child: CircularProgressIndicator(),));
 
         });
     }

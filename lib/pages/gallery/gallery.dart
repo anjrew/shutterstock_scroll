@@ -20,6 +20,7 @@ class _GalleryState extends State<Gallery> {
 
     @override
     Widget build(BuildContext context) {
+        MainBloc logic = MainBloc.of(context);
         return Scaffold(
             body: CustomScrollView(
                 controller: _controller,
@@ -27,7 +28,7 @@ class _GalleryState extends State<Gallery> {
 
                     GalleryAppBar(),
 
-                    GalleryList()
+                    logic.error != null ? ErrorWidget(logic.error) : GalleryList(),
 
                 ]
             )
