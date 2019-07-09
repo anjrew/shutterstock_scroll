@@ -5,6 +5,8 @@ import 'package:http/http.dart';
 import 'package:shutterstock_scroll/classes/image_data.dart';
 import 'dart:convert';
 
+import 'package:shutterstock_scroll/utils/print.dart';
+
 class MainModel extends Model {
 
     List<ImageData> photoData;
@@ -36,6 +38,8 @@ class MainModel extends Model {
             String amountPerPage = 'per_page=${10}';
             String pageNumberQuery = "page=$page";
             String uri = 'https://api.shutterstock.com/v2/images/search?$amountPerPage&&$pageNumberQuery';
+
+            printInfo("Getting $amountPerPage images from page number $pageNumberQuery");
             
             Response response = await httpClient.get(uri, headers: { 'Authorization' :  authString });
 

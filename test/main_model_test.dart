@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:http/http.dart';
 import 'package:matcher/matcher.dart';
 import 'package:shutterstock_scroll/classes/image_data.dart';
