@@ -5,14 +5,13 @@ import 'package:http/http.dart';
 import 'package:shutterstock_scroll/classes/image_data.dart';
 import 'dart:convert';
 
-import 'package:shutterstock_scroll/utils/print.dart';
-
 class MainModel extends Model {
 
     List<ImageData> photoData;
     int pageNumber = 1;
     String error;
     Client httpClient;
+    bool requesting = false;
     
     MainModel({@required this.httpClient}){
 
@@ -24,40 +23,44 @@ class MainModel extends Model {
             .catchError((e) { 
                 displayError(e);
             })
-            .timeout(Duration(seconds: 10));;
+            .timeout(Duration(seconds: 10));
     }
 
-    Future<List<ImageData>> getimages(page)async{
+    Future<List<ImageData>> getimages(int page)async{
+
         var result;
-        try {
-            String ssClientId = "51edc-bf697-a8382-7b9fa-91743-1d438";
-            String ssConsumerSecret = "a4396-09320-26310-71351-cf3ed-981bf";
-            String credentials = "$ssClientId:$ssConsumerSecret";
-            String encodedCredentials = base64.encode(utf8.encode(credentials));
-            String authString = 'Basic $encodedCredentials';
-            String amountPerPage = 'per_page=${10}';
-            String pageNumberQuery = "page=$page";
-            String uri = 'https://api.shutterstock.com/v2/images/search?$amountPerPage&&$pageNumberQuery';
+        if (!requesting){
+            requesting = true;
 
-            printInfo("Getting $amountPerPage images from page number $pageNumberQuery");
-            
-            Response response = await httpClient.get(uri, headers: { 'Authorization' :  authString });
+            try {
+                String ssClientId = "51edc-bf697-a8382-7b9fa-91743-1d438";
+                String ssConsumerSecret = "a4396-09320-26310-71351-cf3ed-981bf";
+                String credentials = "$ssClientId:$ssConsumerSecret";
+                String encodedCredentials = base64.encode(utf8.encode(credentials));
+                String authString = 'Basic $encodedCredentials';
+                String amountPerPage = 'per_page=${10}';
+                String pageNumberQuery = "page=$page";
+                String uri = 'https://api.shutterstock.com/v2/images/search?$amountPerPage&&$pageNumberQuery';
 
-            if (response.statusCode == 200){
-                Map<String,dynamic> responseData = jsonDecode(response.body);
-                if (responseData["data"] != null){
-                    result = resToImageData(responseData["data"]);
-                    pageNumber++;
+                Response response = await httpClient.get(uri, headers: { 'Authorization' :  authString });
+
+                if (response.statusCode == 200){
+                    Map<String,dynamic> responseData = jsonDecode(response.body);
+                    if (responseData["data"] != null){
+                        result = resToImageData(responseData["data"]);
+                        pageNumber++;
+                        requesting = false;
+                    } else {
+                        throw Exception("The respose data was null");
+                    }
                 } else {
-                    throw Exception("The respose data was null");
+                    throw Exception('The GET request failed with code ${response.statusCode}');
                 }
-            } else {
-                throw Exception('The GET request failed with code ${response.statusCode}');
+            } catch (e) {
+                displayError(e);
             }
-        } catch (e) {
-            displayError(e);
         }
-        return result;
+        return result ?? List<ImageData>();
     }
 
     void getMoreImages()async{

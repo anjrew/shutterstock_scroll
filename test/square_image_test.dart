@@ -13,8 +13,6 @@ void main() {
 
         final testWidget = SquareImageWidgetWrapper(imageData);
 
-        // final Image image = Image.asset('assets/placeholder.png', key: Key('placeholder' + imageData.id));
-
         // Test code goes here.
         await tester.pumpWidget(testWidget);
         expect(find.byWidget(testWidget), findsOneWidget);

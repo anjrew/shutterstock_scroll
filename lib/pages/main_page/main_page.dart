@@ -11,6 +11,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+
     ScrollController _controller = new ScrollController();
 
     @override
@@ -25,23 +26,29 @@ class _MainPageState extends State<MainPage> {
             rebuildOnChange: true,
             builder: (BuildContext context, Widget _, MainModel logic) {
             return Scaffold(
-                body: CustomScrollView(controller: _controller, slivers: <Widget>[
-                MainAppBar(),
-                logic.error != null
-                    ? SliverToBoxAdapter(child: 
-                        ErrorMessageWidget(
-                            message: logic.error,
-                            okAction: ()=> logic.error = null))
-                    : GalleryList(),
-            ]));
+                body: CustomScrollView(
+                    controller: _controller, 
+                    slivers: <Widget>[
+
+                        MainAppBar(),
+
+                        logic.error != null
+                            ? ErrorMessageWidget(
+                                    message: logic.error,
+                                    okAction: ()=> setState(() => logic.error = null))
+                            : GalleryList(),
+
+                        SliverToBoxAdapter(child: logic.requesting ? LinearProgressIndicator() : Container())
+
+                    ]));
             });
     }
 
     void handleScroll() {
         double position = _controller.position.pixels;
         double maxExtent = _controller.position.maxScrollExtent;
-        if (position >= maxExtent) {
-        MainModel.of(context).getMoreImages();
+        if (position >= maxExtent && MainModel.of(context).photoData != null) {
+            MainModel.of(context).getMoreImages();
         }
     }
 
