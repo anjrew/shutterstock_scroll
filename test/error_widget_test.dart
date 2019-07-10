@@ -6,7 +6,7 @@ void main() {
     testWidgets('Error widget has a title and message', (WidgetTester tester) async {
         // Test code goes here.
         await tester.pumpWidget(ErrorMessageWidgetWrapper());
-        final Finder titleFinder = find.text('Error');
+        final Finder titleFinder = find.text('Error', skipOffstage: false);
         final Finder messageFinder = find.text('Test');
         final Finder okButtonText = find.text('OK');
         expect(titleFinder, findsOneWidget);

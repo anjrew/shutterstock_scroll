@@ -10,15 +10,15 @@ class ErrorMessageWidget extends StatelessWidget {
 
     @override
     Widget build(BuildContext context) {
-        return  SliverToBoxAdapter(child: AlertDialog(
+        return AlertDialog(
             title: Text("Error"),
             titlePadding: EdgeInsets.all(20),
             content: Text(message),
             contentPadding: EdgeInsets.all(20),
             actions: <Widget>[ 
-                    MaterialButton(child: Text('OK'), 
-                    onPressed: okAction)
+                MaterialButton(child: Text('OK'), 
+                onPressed: okAction)
                 ],
-        ));
+        );
     }
 }

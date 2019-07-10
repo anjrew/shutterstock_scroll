@@ -33,13 +33,13 @@ class _MainPageState extends State<MainPage> {
                         MainAppBar(),
 
                         logic.error != null
-                            ? ErrorMessageWidget(
+                            ? SliverToBoxAdapter(child: 
+                                ErrorMessageWidget(
                                     message: logic.error,
-                                    okAction: ()=> setState(() => logic.error = null))
+                                    okAction: ()=> setState(() => logic.error = null)))
                             : GalleryList(),
 
                         SliverToBoxAdapter(child: logic.requesting ? LinearProgressIndicator() : Container())
-
                     ]));
             });
     }
