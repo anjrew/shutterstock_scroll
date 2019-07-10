@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shutterstock_scroll/widgets/error_widget/error_widget.dart';
 
 void main() {
-    testWidgets('MyWidget has a title and message', (WidgetTester tester) async {
+    testWidgets('Error widget has a title and message', (WidgetTester tester) async {
         // Test code goes here.
         await tester.pumpWidget(ErrorMessageWidgetWrapper());
         final Finder titleFinder = find.text('Error');
@@ -20,8 +20,8 @@ class ErrorMessageWidgetWrapper extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
         return MaterialApp(
-        title: 'Flutter Demo',
-        home: ErrorMessageWidget(message: "Test", okAction: () => print('Ok pressed')),
+            title: 'Error wrapper',
+            home: ErrorMessageWidget(message: "Test", okAction: () => print('Ok pressed')),
         );
     }
 }

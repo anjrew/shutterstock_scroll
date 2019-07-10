@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class GalleryAppBar extends StatelessWidget {
+class MainAppBar extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
         return SliverAppBar(

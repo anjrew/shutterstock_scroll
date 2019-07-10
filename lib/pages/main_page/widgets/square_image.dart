@@ -5,6 +5,7 @@ import 'package:shutterstock_scroll/classes/image_data.dart';
 import 'package:shutterstock_scroll/pages/image_view/image_view.dart';
 
 class SquareImage extends StatelessWidget {
+
   final ImageData _imageData;
   
   const SquareImage(this._imageData);
@@ -16,7 +17,7 @@ class SquareImage extends StatelessWidget {
                 builder: (BuildContext context) => ImageView(_imageData), 
                 fullscreenDialog: true)),
         child: Hero(
-            key: UniqueKey(),
+            key: Key(_imageData.id),
             tag: _imageData.id,
             child: CachedNetworkImage(
               placeholder: (BuildContext context, String string) =>  Shimmer.fromColors(
