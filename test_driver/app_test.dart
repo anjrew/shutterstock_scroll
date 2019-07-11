@@ -2,7 +2,7 @@ import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
  
 void main() {
- 
+    
     FlutterDriver driver;
 
     setUpAll(() async {
@@ -22,11 +22,10 @@ void main() {
     });
 
  
-    test('Verify empty list message is shown', () async {
- 
-      SerializableFinder emptyMessage = find.byType('SquareImage');
-      
-      await driver.waitFor(emptyMessage);
- 
+    test('Find and click on image', () async {
+        SerializableFinder squareImage = find.byType('SquareImage'); 
+        await driver.waitFor(squareImage);
+        await driver.tap(find.byType('SquareImage'));
+        
     });
 }

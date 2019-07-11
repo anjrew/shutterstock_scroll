@@ -11,7 +11,7 @@ class ImageView extends StatelessWidget {
     Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: Text("Image ${_imageData.id}"),
+            title: Text("Image ${_imageData.id}", key: Key('imageViewTitle'),),
         ),
         body: Column(children: <Widget>[
 
