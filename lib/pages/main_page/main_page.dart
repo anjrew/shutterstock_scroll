@@ -36,10 +36,13 @@ class _MainPageState extends State<MainPage> {
                             ? SliverToBoxAdapter(child: 
                                 ErrorMessageWidget(
                                     message: logic.error,
-                                    okAction: ()=> setState(() => logic.error = null)))
+                                    okAction: logic.removeError))
                             : GalleryList(),
 
-                        SliverToBoxAdapter(child: logic.requesting ? LinearProgressIndicator() : Container())
+                        SliverToBoxAdapter(
+                            child: logic.requesting && logic.error == null ? 
+                                LinearProgressIndicator() : 
+                                Container())
                     ]));
             });
     }

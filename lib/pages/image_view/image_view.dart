@@ -6,33 +6,39 @@ import 'package:shutterstock_scroll/classes/image_data.dart';
 class ImageView extends StatelessWidget {
   final ImageData _imageData;
 
-  const ImageView(this._imageData);
-  @override
-  Widget build(BuildContext context) {
+    const ImageView(this._imageData);
+    @override
+    Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Image"),
+            title: Text("Image ${_imageData.id}"),
         ),
         body: Column(children: <Widget>[
-          Hero(
-              key: UniqueKey(),
-              tag: _imageData.id,
-              child: CachedNetworkImage(
-                placeholder: (BuildContext context, String string) =>
-                    Shimmer.fromColors(
-                        baseColor: Colors.white,
-                        highlightColor: Colors.grey,
-                        child: Container(
-                          color: Colors.white54,
-                        )),
-                errorWidget:
-                    (BuildContext context, String message, Object error) =>
-                        Image.asset('assets/placeholder.png',
-                            key: Key('placeholder' + _imageData.id)),
-                imageUrl: _imageData.url,
-                fit: BoxFit.cover,
-              )),
-          Text(_imageData.description)
+
+            Hero(
+                key: UniqueKey(),
+                tag: _imageData.id,
+                child: CachedNetworkImage(
+                    width: double.infinity,
+                    placeholder: (BuildContext context, String string) =>
+                        Shimmer.fromColors(
+                            baseColor: Colors.white,
+                            highlightColor: Colors.grey,
+                            child: Container(
+                            color: Colors.white54,
+                            )),
+                    errorWidget:
+                        (BuildContext context, String message, Object error) =>
+                            Image.asset('assets/placeholder.png',
+                                key: Key('placeholder' + _imageData.id)),
+                    imageUrl: _imageData.url,
+                    fit: BoxFit.cover,
+                )),
+
+            Padding(
+                padding: EdgeInsets.all(20), 
+                child: Text(_imageData.description, textAlign: TextAlign.center,))
+
         ]));
-  }
+    }
 }

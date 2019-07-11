@@ -15,7 +15,7 @@ class MainModel extends Model {
     
     MainModel({@required this.httpClient}){
 
-        getimages(pageNumber)
+        getImages(pageNumber)
             .then((result) {  
                 photoData = result;
                 notifyListeners();
@@ -26,7 +26,7 @@ class MainModel extends Model {
             .timeout(Duration(seconds: 10));
     }
 
-    Future<List<ImageData>> getimages(int page)async{
+    Future<List<ImageData>> getImages(int page)async{
 
         var result;
         if (!requesting){
@@ -65,7 +65,7 @@ class MainModel extends Model {
 
     void getMoreImages()async{
         try {
-            photoData.addAll(await getimages(pageNumber).timeout(Duration(seconds: 10)));
+            photoData.addAll(await getImages(pageNumber).timeout(Duration(seconds: 10)));
             notifyListeners();
         } catch (e) {
             displayError(e);
@@ -85,6 +85,17 @@ class MainModel extends Model {
         this.error = e.toString();
         notifyListeners();
         print(e);
+    }
+
+    void removeError()async{
+        error = null;
+        notifyListeners();
+        try {
+            photoData.addAll(await getImages(pageNumber).timeout(Duration(seconds: 10)));
+            notifyListeners();
+        } catch (e) {
+            displayError(e);
+        }
     }
     
     static MainModel of(BuildContext context) => ScopedModel.of<MainModel>(context);
