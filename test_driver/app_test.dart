@@ -23,9 +23,9 @@ void main() {
 
  
     test('Find and click on image', () async {
-        SerializableFinder squareImage = find.byType('SquareImage'); 
-        await driver.waitFor(squareImage);
+        await driver.waitFor(find.byType('SquareImage'));
         await driver.tap(find.byType('SquareImage'));
-        
+        print("Found the square image");
+        await driver.waitFor(find.byValueKey('imageViewTitle'));
     });
 }
