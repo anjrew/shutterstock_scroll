@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,22 +14,60 @@ void main() {
                             description: "Wuvmibdaj widiru hiz hiod vocbelbo ow ude ne izejueto ifpe od de. Edijulse menafmov api cat omoji vortieri lovo lekulhi feno ton ekelob dij womkorut zooka nosdauj si isve. Ca hulza ud cek tuh vuf ik viujiha suurucof heihail uhebaut zuzoso buliwru ga evile mujjegho. Po ijikarep kehesegi wem veno vompefi ilfoov gugileb hikafrur fu imsocfut efte zinhin. Ajeojjaj muod cutriv mikvo waknobzil gamahfem colpeabu ceb azi guepjo ufdel wuzin su vofsuna ficsot wiluwa we lirujri.",
                             id: '973416');
 
+    testWidgets('Title is correct', (WidgetTester tester) async {
+        await tester.pumpWidget(ImageViewWidgetWrapper(imageData));
+        expect(find.text('Image ${imageData.id}'), findsOneWidget);
+    });
+
+    testWidgets('Description is correct', (WidgetTester tester) async {
+        await tester.pumpWidget(ImageViewWidgetWrapper(imageData));
+        expect(find.text(imageData.description), findsOneWidget);
+    });
+
+    testWidgets('Has a hero', (WidgetTester tester) async {
+        await tester.pumpWidget(ImageViewWidgetWrapper(imageData));
+        expect(find.byType(Hero), findsOneWidget);
+    });
+
+    testWidgets('Has a shimmer', (WidgetTester tester) async {
+        await tester.pumpWidget(ImageViewWidgetWrapper(imageData));
+        expect(find.byType(Shimmer), findsOneWidget);
+    });
+
     testWidgets('Imageview has all required widgets in the tree', (WidgetTester tester) async {
         
         // Test code goes here.
         await tester.pumpWidget(ImageViewWidgetWrapper(imageData));
-        final Finder titleFinder = find.text('Image ${imageData.id}');
-        final Finder descriptionFinder = find.text(imageData.description);
-        final Finder imageFinder = find.byType(CachedNetworkImage);
-        final Finder shimmerFinder = find.byType(Shimmer);
-        final Finder heroFinder = find.byType(Hero);
-       
-        expect(titleFinder, findsOneWidget);
-        expect(imageFinder, findsOneWidget);
-        expect(shimmerFinder, findsOneWidget);
-        expect(heroFinder, findsOneWidget);
-        expect(descriptionFinder, findsOneWidget);
+        expect(find.text('Image ${imageData.id}'), findsOneWidget);
+        expect(find.text(imageData.description), findsOneWidget);
+        expect(find.text(imageData.description), findsOneWidget);
+        expect(find.byType(Hero), findsOneWidget);
+        expect(find.byType(Shimmer), findsOneWidget);
+    });
+
+    testWidgets('Imageview has all required widgets in the tree', (WidgetTester tester) async {
         
+        // Test code goes here.
+        await tester.pumpWidget(ImageViewWidgetWrapper(imageData));
+        expect(find.text('Image ${imageData.id}'), findsOneWidget);
+        expect(find.text(imageData.description), findsOneWidget);
+        expect(find.text(imageData.description), findsOneWidget);
+        expect(find.byType(Hero), findsOneWidget);
+        expect(find.byType(Shimmer), findsOneWidget);
+    });
+
+    testWidgets("Test UI layout", (WidgetTester tester) async {
+
+        final goldenTestWidget = ImageViewWidgetWrapper(imageData);
+        
+        await tester.pumpWidget(goldenTestWidget);
+  
+        await expectLater(
+            find.byType(ImageViewWidgetWrapper),
+            matchesGoldenFile(
+                'golden/test_image_view_ui.png'),
+                    skip: !Platform.isMacOS,);
+
     });
 }
 

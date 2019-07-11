@@ -1,17 +1,45 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shutterstock_scroll/widgets/error_widget/error_widget.dart';
 
 void main() {
-    testWidgets('Error widget has a title and message', (WidgetTester tester) async {
-        // Test code goes here.
+    testWidgets('Message is correct', (WidgetTester tester) async {
         await tester.pumpWidget(ErrorMessageWidgetWrapper());
-        final Finder titleFinder = find.text('Error', skipOffstage: false);
-        final Finder messageFinder = find.text('Test');
-        final Finder okButtonText = find.text('OK');
-        expect(titleFinder, findsOneWidget);
-        expect(messageFinder, findsOneWidget);
-        expect(okButtonText, findsOneWidget);
+        expect(find.text('Test'), findsOneWidget);
+    });
+
+    testWidgets('Title is correct', (WidgetTester tester) async {
+        await tester.pumpWidget(ErrorMessageWidgetWrapper());
+        expect(find.text('Error'), findsOneWidget);
+    });
+
+    testWidgets('Button text is correct', (WidgetTester tester) async {
+        await tester.pumpWidget(ErrorMessageWidgetWrapper());
+        expect(find.text('OK'), findsOneWidget);
+    });
+
+    testWidgets('Is within an alert diolog', (WidgetTester tester) async {
+        await tester.pumpWidget(ErrorMessageWidgetWrapper());
+        expect(find.byType(AlertDialog), findsOneWidget);
+    });
+
+    testWidgets('Has material button', (WidgetTester tester) async {
+        await tester.pumpWidget(ErrorMessageWidgetWrapper());
+        expect(find.byType(MaterialButton), findsOneWidget);
+    });
+
+    testWidgets("Test UI layout", (WidgetTester tester) async {
+
+        final goldenTestWidget = ErrorMessageWidgetWrapper();
+        
+        await tester.pumpWidget(goldenTestWidget);
+  
+        await expectLater(
+            find.byType(ErrorMessageWidgetWrapper),
+            matchesGoldenFile(
+                'golden/test_error_widget_ui.png'),
+                    skip: !Platform.isMacOS,);
     });
 }
 
