@@ -5,16 +5,17 @@ import 'package:shutterstock_scroll/classes/image_data.dart';
 import 'package:shutterstock_scroll/pages/image_view/image_view.dart';
 
 void main() {
-    testWidgets('MyWidget has a title and message', (WidgetTester tester) async {
-        
+
+
+    testWidgets('Imageview test has a title and message', (WidgetTester tester) async {
         
         // Test code goes here.
         await tester.pumpWidget(ImageViewWidgetWrapper());
-        final Finder titleFinder = find.text('Image');
-        // final Finder imageFinder = find.byWidget(new CachedNetworkImage(imageUrl: "http://gekomim.rs/imuesewe",), skipOffstage: false);
+        final Finder titleFinder = find.text('Image 973416');
+        final Finder imageFinder = find.byType(CachedNetworkImage);
        
         expect(titleFinder, findsOneWidget);
-        // expect(imageFinder, findsOneWidget);
+        expect(imageFinder, findsOneWidget);
     });
 }
 

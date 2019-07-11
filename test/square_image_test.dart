@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shutterstock_scroll/classes/image_data.dart';
@@ -13,9 +14,10 @@ void main() {
 
         final testWidget = SquareImageWidgetWrapper(imageData);
 
-        // Test code goes here.
         await tester.pumpWidget(testWidget);
+
         expect(find.byWidget(testWidget), findsOneWidget);
+        expect(find.byType(CachedNetworkImage).first, findsOneWidget);
         expect(testWidget.imageData, imageData);
     });
 }
