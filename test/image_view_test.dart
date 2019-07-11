@@ -34,6 +34,11 @@ void main() {
         expect(find.byType(Shimmer), findsOneWidget);
     });
 
+    testWidgets('Has a cached network image', (WidgetTester tester) async {
+        await tester.pumpWidget(ImageViewWidgetWrapper(imageData));
+        expect(find.byType(CachedNetworkImage), findsOneWidget);
+    });
+
     testWidgets('Imageview has all required widgets in the tree', (WidgetTester tester) async {
         
         // Test code goes here.
