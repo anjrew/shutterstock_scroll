@@ -20,6 +20,7 @@ class MainModel extends Model {
                 photoData = result;
                 notifyListeners();
             })
+            .timeout(Duration(seconds: 10))
             .catchError((e) { 
                 displayError(e);
             });
