@@ -16,8 +16,9 @@ class GalleryList extends StatelessWidget {
             builder: (BuildContext context, Widget _, MainModel model){
 
             List<ImageData>  _photoData = model.photoData;
+            bool showPhotos = _photoData != null && _photoData.length > 0;
 
-            return _photoData != null ? SliverGrid(
+            return showPhotos ? SliverGrid(
                 key: UniqueKey(),
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                     maxCrossAxisExtent: 300,

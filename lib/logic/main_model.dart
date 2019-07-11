@@ -7,7 +7,7 @@ import 'dart:convert';
 
 class MainModel extends Model {
 
-    List<ImageData> photoData;
+    List<ImageData> photoData = new List<ImageData>();
     int pageNumber = 1;
     String error;
     Client httpClient;
@@ -22,8 +22,8 @@ class MainModel extends Model {
             })
             .catchError((e) { 
                 displayError(e);
-            })
-            .timeout(Duration(seconds: 10));
+            });
+            
     }
 
     Future<List<ImageData>> getImages(int page)async{

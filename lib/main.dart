@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -10,7 +8,7 @@ import 'package:flutter_driver/driver_extension.dart';
 import 'logic/main_model.dart';
 
 void main() {
-    
+
     dataHandler(String msg) async {}
     enableFlutterDriverExtension(handler: dataHandler);
     runApp(App());
