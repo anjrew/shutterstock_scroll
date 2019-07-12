@@ -22,10 +22,15 @@ void main() {
     });
 
  
-    // test('Find and click on image', () async {
-    //     await driver.waitFor(find.byType('SquareImage'));
-    //     await driver.tap(find.byType('SquareImage'));
-    //     print("Found the square image");
-    //     await driver.waitFor(find.byValueKey('imageViewTitle'));
-    // });
+    test('Find and click on image', () async {
+                        
+        // await driver.waitFor(find.byValueKey("mainAppBar"));
+        // print("Found app bar");
+        await driver.waitFor(find.byType("GalleryList"));
+        print("Found GalleryList");
+        await driver.waitFor(find.byValueKey("257290"));
+        await driver.tap(find.byValueKey("257290"));
+        print("Found the square image");
+        await driver.waitFor(find.byValueKey('imageViewTitle'));
+    });
 }
