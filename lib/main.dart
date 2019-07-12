@@ -2,32 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shutterstock_scroll/pages/main_page/main_page.dart';
-import 'package:flutter_driver/driver_extension.dart';
-
-
 import 'logic/main_model.dart';
 
-void main() {
+final Client realHttpClient = new Client(); 
 
-    dataHandler(String msg) async {}
-    enableFlutterDriverExtension(handler: dataHandler);
-    runApp(App());
-} 
+void main() => runApp(App(httpClient: realHttpClient));
+
 class App extends StatefulWidget {
-  App({Key key}) : super(key: key);
 
-  _AppState createState() => _AppState();
+    final Client httpClient;
+
+    const App({ @required this.httpClient });
+
+    _AppState createState() => _AppState();
 }
 
 class _AppState extends State<App> {
 
-    final Client httpClient = new Client(); 
     MainModel _model;
 
     @override
     void initState() {
         super.initState();
-        _model = MainModel(httpClient: httpClient);
+        _model = MainModel(httpClient: widget.httpClient);
     }
 
     @override

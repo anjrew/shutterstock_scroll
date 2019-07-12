@@ -75,10 +75,10 @@ class MainModel extends Model {
 
     List<ImageData> resToImageData(List<dynamic> data){
         return data.map((dynamic imageData) => new ImageData(
-                    url: imageData['assets']['huge_thumb']['url'],
-                    description: imageData['description'],
-                    id: imageData['id']
-                )
+                url: imageData['assets']['huge_thumb']['url'],
+                description: imageData['description'],
+                id: imageData['id']
+            )
         ).toList();
     }
 
