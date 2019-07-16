@@ -70,8 +70,6 @@ https://a-johnson-developer-berlin.herokuapp.com/
 - Flutter driver was not corretly locating the widgets with the SerializableFinder class. I rasied an issue on Github as I could fin no solutions or topics on the rest of the web. https://github.com/flutter/flutter/issues/36244
 
 
-
-
 ## Getting Started
 
 This project is a starting point for a Flutter application.
