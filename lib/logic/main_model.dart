@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:http/http.dart';
+import 'package:shutterstock_scroll/classes/error_reporting.dart' as sentry;
 import 'package:shutterstock_scroll/classes/image_data.dart';
 import 'dart:convert';
 
@@ -15,6 +16,8 @@ class MainModel extends Model {
     
     MainModel({@required this.httpClient}){
 
+		sentry.setupCrashReporting();
+
         getImages(pageNumber)
             .then((result) {  
                 photoData = result;
@@ -23,6 +26,7 @@ class MainModel extends Model {
             .timeout(Duration(seconds: 10))
             .catchError((e) { 
                 displayError(e);
+				sentry.report(e);
             });
             
     }
@@ -59,6 +63,7 @@ class MainModel extends Model {
                 }
             } catch (e) {
                 displayError(e);
+				sentry.report(e);
             }
         }
         return result ?? List<ImageData>();
@@ -70,6 +75,7 @@ class MainModel extends Model {
             notifyListeners();
         } catch (e) {
             displayError(e);
+			sentry.report(e);
         }
     }
 
@@ -96,6 +102,7 @@ class MainModel extends Model {
             notifyListeners();
         } catch (e) {
             displayError(e);
+			sentry.report(e);
         }
     }
     
