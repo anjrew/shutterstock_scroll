@@ -67,6 +67,8 @@ https://a-johnson-developer-berlin.herokuapp.com/
 **Issues**
 - When trying to load a project file as mock JSON data an error was thrown. I raised an issue on the flutter GitHub project as no clear solution was given in the documentation and no solutions where on google searches or stack overflow. https://github.com/flutter/flutter/issues/35740.
 
+- Flutter driver was not corretly locating the widgets with the SerializableFinder class. I rasied an issue on Github as I could fin no solutions or topics on the rest of the web. https://github.com/flutter/flutter/issues/36244
+
 
 
 

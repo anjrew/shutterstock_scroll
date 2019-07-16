@@ -10,7 +10,6 @@ void main() {
     });
 
     tearDownAll(() async {
-        
         if (driver != null) {     
             await driver.close();
         }
@@ -22,7 +21,7 @@ void main() {
     });
 
  
-    test('Find and click on image', () async {
+    test('Run smoke tests', () async {
 
 		print('Trying to find mainApp');
 		await driver.waitFor(find.byValueKey("mainApp"));
