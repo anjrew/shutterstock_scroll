@@ -50,6 +50,11 @@ I used this package to mock classes and in particular, inject a Mock http client
 ## Tests
 - Unit and widget tests are carried out on all components
 
+## Workflow
+- I chose to write the tests after writing the code rather than writing tests first.
+- I setup CICD workflow with NeverCode's Codemagic CICD tool to run tests every time I pushed to this git repo. I was notified of the result by email.
+
+
 **UI**
 - I chose to use Slivers to make the app bar disappear on scolling. This maximises the viewport and gives the user the best experience.
 
