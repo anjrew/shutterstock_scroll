@@ -16,21 +16,37 @@ void main() {
         }
     });
 
-    test('check flutter driver health', () async {
+    test('Check flutter driver health', () async {
         Health health = await driver.checkHealth();
         print(health.status);
     });
 
  
     test('Find and click on image', () async {
-                        
-        // await driver.waitFor(find.byValueKey("mainAppBar"));
-        // print("Found app bar");
-        await driver.waitFor(find.byType("GalleryList"));
+
+		print('Trying to find mainApp');
+		await driver.waitFor(find.byValueKey("mainApp"));
+        print("Found mainApp");
+		
+		print('Trying to find gallery list');
+		await driver.waitFor(find.byValueKey("GalleryList"));
         print("Found GalleryList");
+
+		print('Trying to find mainAppBar');
+		await driver.waitFor(find.byValueKey("mainAppBar"));
+        print("Found mainAppBar");
+		
+		print('Trying to find image list');
         await driver.waitFor(find.byValueKey("257290"));
+		print('Image found');
+
+		print('Tapping on image');
         await driver.tap(find.byValueKey("257290"));
-        print("Found the square image");
+        print("Tapped on image");
+		
+		print('Trying to find imageViewTitle');
         await driver.waitFor(find.byValueKey('imageViewTitle'));
+		print('imageViewTitle found');
+
     });
 }

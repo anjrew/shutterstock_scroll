@@ -65,7 +65,9 @@ https://a-johnson-developer-berlin.herokuapp.com/
 - I chose to use Slivers to make the app bar disappear on scolling. This maximises the viewport and gives the user the best experience.
 
 **Issues**
-- When trying to load a project file as mock JSON data an error was thrown. I raised an issue on the flutter GitHub project as no clear solution was given in the documentation and no solutions where on google searches or stackoverflow.
+- When trying to load a project file as mock JSON data an error was thrown. I raised an issue on the flutter GitHub project as no clear solution was given in the documentation and no solutions where on google searches or stack overflow. https://github.com/flutter/flutter/issues/35740.
+
+
 
 
 ## Getting Started

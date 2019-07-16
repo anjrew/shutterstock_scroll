@@ -19,7 +19,7 @@ class GalleryList extends StatelessWidget {
             bool showPhotos = _photoData != null && _photoData.length > 0;
 
             return showPhotos ? SliverGrid(
-                key: UniqueKey(),
+                key: ValueKey('GalleryList'),
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                     maxCrossAxisExtent: 300,
                     mainAxisSpacing: 5.0,

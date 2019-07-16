@@ -33,6 +33,7 @@ class _AppState extends State<App> {
             
             model: _model,
             child: new MaterialApp(
+				key: ValueKey('mainApp'),
                 title: 'Shutterstock Scroll',
                 debugShowCheckedModeBanner: false,
                 theme: ThemeData(
