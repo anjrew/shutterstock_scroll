@@ -2,8 +2,7 @@
 
 This is a mobile application that gets images from the Shutterstock api with infinate scroll functionality. The user can view a larger image when the use clicks on an image.
 
-- To make an application that scrolls though images on the Shutterstock image platform.
-With the amount of images on the Shutterstock platform it would be impractical and almost impossible to download all the image data from the Shutterstock database.
+- With the amount of images on the Shutterstock platform it would be impractical and almost impossible to download all the image data from the Shutterstock database.
 
 - The solution is to get a small selection of the most recent images and display them.
 
