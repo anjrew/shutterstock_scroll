@@ -4,6 +4,7 @@ import 'package:shutterstock_scroll/classes/image_data.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shutterstock_scroll/logic/main_model.dart';
 import 'package:shutterstock_scroll/pages/main_page/widgets/square_image.dart';
+import 'package:shutterstock_scroll/widgets/error_widget/shutterstock_loader.dart';
 
 
 class GalleryList extends StatelessWidget {
@@ -36,7 +37,7 @@ class GalleryList extends StatelessWidget {
                         child: Container(
                             height: MediaQuery.of(context).size.height, 
                             alignment: Alignment(0, 0),   
-                            child: CircularProgressIndicator(),));
+                            child: SSLoader(),));
         });
     }
 }

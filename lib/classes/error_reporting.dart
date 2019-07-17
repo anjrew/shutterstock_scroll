@@ -8,7 +8,7 @@ SentryClient setupCrashReporting(){
 	return _sentry;
 }
 
-void report(Error error){
+void report(dynamic error){
 	_sentry.captureException(
 		exception: error,
 		stackTrace: error.stackTrace)
