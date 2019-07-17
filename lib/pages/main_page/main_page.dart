@@ -26,24 +26,28 @@ class _MainPageState extends State<MainPage> {
             rebuildOnChange: true,
             builder: (BuildContext context, Widget _, MainModel logic) {
             return Scaffold(
-                body: CustomScrollView(
+                body: Stack(children: <Widget>[
+					CustomScrollView(
                     controller: _controller, 
                     slivers: <Widget>[
 
                         MainAppBar(),
 
-                        logic.error != null
-                            ? SliverToBoxAdapter(child: 
-                                ErrorMessageWidget(
-                                    message: logic.error,
-                                    okAction: logic.removeError))
-                            : GalleryList(),
+                        GalleryList(),
 
                         SliverToBoxAdapter(
                             child: logic.requesting && logic.error == null ? 
                                 LinearProgressIndicator() : 
                                 Container())
-                    ]));
+                    ]),
+
+
+					logic.error != null
+                            ? SliverToBoxAdapter(child: 
+                                ErrorMessageWidget(
+                                    message: logic.error,
+                                    okAction: logic.removeError)): Container()
+				],));
             });
     }
 

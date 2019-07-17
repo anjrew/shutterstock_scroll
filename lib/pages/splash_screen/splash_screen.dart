@@ -9,7 +9,7 @@ class SplashScreen extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
 
-		Future(() => Navigator.push(context, FadeRoute(page: MainPage())));
+		Future.delayed(Duration(milliseconds: 1), () => Navigator.push(context, FadeRoute(page: MainPage())));
 
 		Image image;
         try {
@@ -24,8 +24,11 @@ class SplashScreen extends StatelessWidget {
             sentry.report(e);
         }
 
-        return Container(
-            child: Hero(tag: 'spinner', child: image),
+        return Scaffold(
+			body: Container(
+				alignment: Alignment(0, 0),
+            	child: Hero(tag: 'spinner', child: image),
+			)
         );
     }
 }

@@ -30,7 +30,6 @@ class _AppState extends State<App> {
     @override
     Widget build(BuildContext context) {
         return ScopedModel(
-            
             model: _model,
             child: new MaterialApp(
 				key: ValueKey('mainApp'),

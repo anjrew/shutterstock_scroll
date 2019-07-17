@@ -6,6 +6,7 @@ class MainAppBar extends StatelessWidget {
         return SliverAppBar(
             key: ValueKey('mainAppBar'),
             floating: true,
+			automaticallyImplyLeading: false,
             title: Text('Shutterstock Scroller')
         );
     }
