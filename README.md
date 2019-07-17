@@ -51,7 +51,12 @@ I used this package to mock classes and in particular, inject a Mock http client
 - Unit and widget tests are carried out on all components
 
 ## Workflow
+
+**Tests** 
+- Tests where written after real code.
 - I chose to write the tests after writing the code rather than writing tests first.
+
+**CICD**
 - I setup CICD workflow with NeverCode's Codemagic CICD tool to run tests every time I pushed to this git repo. I was notified of the result by email.
 
 
