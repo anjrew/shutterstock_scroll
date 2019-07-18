@@ -15,8 +15,9 @@ class MainModel extends Model {
     Client httpClient;
     bool requesting = false;
 	Connectivity _connectivity;
-	StreamController<String> connectionStateChanged;
-    
+	StreamController<String> _connectionStateChanged;
+    StreamController<dynamic> _errorStreamController;
+
     MainModel({@required this.httpClient}){
 
 		sentry.setupCrashReporting();
@@ -31,16 +32,19 @@ class MainModel extends Model {
                 displayError(e);
 				sentry.report(e);
             });
-			connectionStateChanged = new StreamController();
+			_errorStreamController = new StreamController<dynamic>.broadcast();
+			_connectionStateChanged = new StreamController<String>.broadcast();
 			_connectivity = Connectivity();
 			_connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
 			    // Got a new connectivity status!
 				if (result == ConnectivityResult.none){
-					connectionStateChanged.add("You have no internet connection");
+					_connectionStateChanged.add("You have no internet connection");
 				}
 			});
     }
 
+	Stream<String> get connectionStateStream => _connectionStateChanged.stream;
+	Stream<String> get errorStream => _errorStreamController.stream;
 
 
     Future<List<ImageData>> getImages(int page)async{
@@ -100,9 +104,10 @@ class MainModel extends Model {
         ).toList();
     }
 
-    void displayError(e){
-        this.error = e.toString();
-        notifyListeners();
+    void displayError(dynamic e){
+		_errorStreamController.add(e);
+        // this.error = e.toString();
+        // notifyListeners();
         print(e);
     }
 
