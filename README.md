@@ -1,6 +1,6 @@
 # shutterstock_scroll
 
-This is a mobile application that gets images from the Shutterstock api with infinate scroll functionality. The user can view a larger image when the use clicks on an image.
+This is a mobile application that gets images from the Shutterstock api with infinite scroll functionality. The user can view a larger image when the use clicks on an image.
 
 With the amount of images on the Shutterstock platform it would be impractical and almost impossible to download all the image data from the Shutterstock database.
 
@@ -20,9 +20,9 @@ Each time including the first we get 10 images. This is enough to fill most scre
 
 The Shutterstock endpoint to get more images, takes a query of the amount of images with each call(Images per page) and what page number you would like.
 
-To make sure we keep getting the next page on each call, there is a integer in the main scoped mondel object that relates to the page number to call for. It starts at 0 on initialisation and with each call is incremented up by one. This makes sure on the next call the next batch(next page) of images is requested. 
+To make sure we keep getting the next page on each call, there is a integer in the main scoped model object that relates to the page number to call for. It starts at 0 on initialisation and with each call is incremented up by one. This makes sure on the next call the next batch(next page) of images is requested. 
 
-When the images are returned in the response, the existing array of displayed images and the new array from the response are reduced into one and the lisview is populated with the new data.
+When the images are returned in the response, the existing array of displayed images and the new array from the response are reduced into one and the listview is populated with the new data.
 
 ## Design choice
 
@@ -46,10 +46,10 @@ This package was implement to create launcher icons for the App on both platform
 I used this package to mock classes and in particular, inject a Mock http client for testing purposes.
 
 - **connectivity: ^0.4.3+5**
-Becasue the application relies so much on the internet, this package is used to listen to changes in network connectivity.
+Because the application relies so much on the internet, this package is used to listen to changes in network connectivity.
 
 - **fluttertoast: ^3.1.0**
-This package is used to notify the user of any acivities or state changes within the app. In this case it notifies the user when internet connection is lost.
+This package is used to notify the user of any activities or state changes within the app. In this case it notifies the user when internet connection is lost.
 
 ## Tests
 - Unit and widget tests are carried out on all components.
@@ -62,11 +62,11 @@ This package is used to notify the user of any acivities or state changes within
 Tests were written after writing the code rather than writing tests first.
 
 **CICD**
-CICD workflow with NeverCode's Codemagic CICD tool is setup to run tests every time commits are pushed to this git repo. subscribers are notifed with the results of the test by email or slack.
+CICD workflow with NeverCode's Codemagic CICD tool is setup to run tests every time commits are pushed to this git repo. subscribers are notified with the results of the test by email or slack.
 
 ## UI
 
-- Slivers and a custom scrollview are implemented to make the app bar disappear on scolling. This maximises the viewport and gives the user the best experience.
+- Slivers and a custom scrollview are implemented to make the app bar disappear on scrolling. This maximises the viewport and gives the user the best experience.
 
 **Animations**
 - Hero animations are used to guide the user from the gallery to the full image view.
@@ -75,10 +75,11 @@ CICD workflow with NeverCode's Codemagic CICD tool is setup to run tests every t
 ## Issues
 - When trying to load a project file as mock JSON data an error was thrown. An issue is raised on the flutter GitHub project as no clear solution was given in the documentation and no solutions where on google searches or stack overflow. https://github.com/flutter/flutter/issues/35740.
 
-- Flutter driver was not corrcetly locating the widgets with the SerializableFinder class. An issue is raised on the flutter GitHub project as no solutions or topics on the rest of the web could be found. https://github.com/flutter/flutter/issues/36244.
+- Flutter driver was not correctly locating the widgets with the SerializableFinder class. An issue is raised on the flutter GitHub project as no solutions or topics on the rest of the web could be found. https://github.com/flutter/flutter/issues/36244.
 
 - When doing tests a error appears in the logs related the the "connectivity" package. An issue is raised on the flutter GitHub project https://github.com/flutter/flutter/issues/36440.
 
 ## Check out my page for my CV and general things about me
 https://a-johnson-developer-berlin.herokuapp.com/
+
 
