@@ -42,10 +42,17 @@ I used these packages to cache images and load them quicker. If the user uses th
 A nice little UI package with gives a smooth transition for loading images. Teamed up with the *cached_network_image* you can add a shimmer placeholder.
 
 **flutter_launcher_icons: ^0.7.2+1**
-I chose to implement this package to easily creat launcher icons for the App on both platforms and multiple devices.
+This package was implement to create launcher icons for the App on both platforms and multiple devices.
 
 **mockito: ^4.1.0**
 I used this package to mock classes and in particular, inject a Mock http client for testing purposes.
+
+**connectivity: ^0.4.3+5**
+Becasue the application relies so much on the internet, this package is used to listen to changes in network connectivity.
+
+**fluttertoast: ^3.1.0**
+This package is used to notify the user of any acivities or state changes within the app. In this case it notifies the user when internet connection is lost.
+
 
 ## Tests
 - Unit and widget tests are carried out on all components
@@ -60,8 +67,13 @@ I used this package to mock classes and in particular, inject a Mock http client
 - I setup CICD workflow with NeverCode's Codemagic CICD tool to run tests every time I pushed to this git repo. I was notified of the result by email.
 
 
-**UI**
-- I chose to use Slivers to make the app bar disappear on scolling. This maximises the viewport and gives the user the best experience.
+## UI
+
+- Slivers and a custom scrollview are implemented to make the app bar disappear on scolling. This maximises the viewport and gives the user the best experience.
+
+**Animations
+- Hero animations are used to guide the user from the gallery to the image.
+- The initial loading animation is used with a continuous rotation transition.
 
 ## Issues
 - When trying to load a project file as mock JSON data an error was thrown. I raised an issue on the flutter GitHub project as no clear solution was given in the documentation and no solutions where on google searches or stack overflow. https://github.com/flutter/flutter/issues/35740.
