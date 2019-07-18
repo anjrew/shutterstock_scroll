@@ -66,7 +66,7 @@ class MainModel extends Model {
 
                 if (response.statusCode == 200){
                     Map<String,dynamic> responseData = jsonDecode(response.body);
-                    if (responseData["data"] != null){
+                    if (responseData["data"] != null && responseData["data"].length > 0){
                         result = resToImageData(responseData["data"]);
                         pageNumber++;
                         requesting = false;

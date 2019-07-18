@@ -58,7 +58,7 @@ class SquareImageWidgetWrapper extends StatelessWidget {
 
         return MaterialApp(
             title: 'Flutter Tests',
-            home: SquareImage(imageData),
+            home:  Material(child:SquareImage(imageData),)
         );
     }
 }
