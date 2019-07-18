@@ -57,14 +57,14 @@ This package is used to notify the user of any acivities or state changes within
 ## Tests
 - Unit and widget tests are carried out on all components
 
+
 ## Workflow
 
 **Tests** 
-- Tests where written after real code.
-- I chose to write the tests after writing the code rather than writing tests first.
+- Tests were written after writing the code rather than writing tests first.
 
 **CICD**
-- I setup CICD workflow with NeverCode's Codemagic CICD tool to run tests every time I pushed to this git repo. I was notified of the result by email.
+- CICD workflow with NeverCode's Codemagic CICD tool is setup to run tests every time commits are pushed to this git repo. subscribers are notifed with the results of the test by email or slack.
 
 
 ## UI
