@@ -5,6 +5,7 @@ import 'package:http/http.dart';
 import 'package:shutterstock_scroll/classes/error_reporting.dart' as sentry;
 import 'package:shutterstock_scroll/classes/image_data.dart';
 import 'dart:convert';
+import 'package:connectivity/connectivity.dart';
 
 class MainModel extends Model {
 
@@ -13,6 +14,8 @@ class MainModel extends Model {
     String error;
     Client httpClient;
     bool requesting = false;
+	Connectivity _connectivity;
+	StreamController<String> connectionStateChanged;
     
     MainModel({@required this.httpClient}){
 
@@ -28,8 +31,17 @@ class MainModel extends Model {
                 displayError(e);
 				sentry.report(e);
             });
-            
+			connectionStateChanged = new StreamController();
+			_connectivity = Connectivity();
+			_connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
+			    // Got a new connectivity status!
+				if (result == ConnectivityResult.none){
+					connectionStateChanged.add("You have no internet connection");
+				}
+			});
     }
+
+
 
     Future<List<ImageData>> getImages(int page)async{
 

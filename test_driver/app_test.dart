@@ -19,7 +19,6 @@ void main() {
         Health health = await driver.checkHealth();
         print(health.status);
     });
-
  
     test('Run smoke tests', () async {
 

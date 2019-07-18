@@ -4,6 +4,8 @@ import 'package:shutterstock_scroll/logic/main_model.dart';
 import 'package:shutterstock_scroll/pages/main_page/widgets/main_app_bar.dart';
 import 'package:shutterstock_scroll/pages/main_page/widgets/gallery_list.dart';
 import 'package:shutterstock_scroll/widgets/error_widget/error_widget.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 
 class MainPage extends StatefulWidget {
     @override
@@ -18,15 +20,18 @@ class _MainPageState extends State<MainPage> {
     void initState() {
         super.initState();
         _controller.addListener(handleScroll);
+		MainModel.of(context).connectionStateChanged.stream.listen(showConnectionStatus);
     }
 
     @override
     Widget build(BuildContext context) {
+
         return ScopedModelDescendant<MainModel>(
             rebuildOnChange: true,
-            builder: (BuildContext context, Widget _, MainModel logic) {
+            builder: (BuildContext scopedContext, Widget _, MainModel logic) {
+
             return Scaffold(
-                body: Stack(children: <Widget>[
+                body: 
 					CustomScrollView(
                     controller: _controller, 
                     slivers: <Widget>[
@@ -36,20 +41,31 @@ class _MainPageState extends State<MainPage> {
                         GalleryList(),
 
                         SliverToBoxAdapter(
-                            child: logic.requesting && logic.error == null ? 
-                                LinearProgressIndicator() : 
-                                Container())
-                    ]),
+                            child: logic.requesting && logic.error == null 
+							? 	LinearProgressIndicator() 
+									: Container()),
 
-
-					logic.error != null
-                            ? SliverToBoxAdapter(child: 
-                                ErrorMessageWidget(
-                                    message: logic.error,
-                                    okAction: logic.removeError)): Container()
+						SliverToBoxAdapter(
+							child: logic.error != null
+								? ErrorMessageWidget(
+										message: logic.error,
+										okAction: logic.removeError)
+										: Container())
 				],));
             });
     }
+
+	void showConnectionStatus(String status){
+			Fluttertoast.showToast(
+			msg: status,
+			toastLength: Toast.LENGTH_LONG,
+			gravity: ToastGravity.CENTER,
+			timeInSecForIos: 2,
+			backgroundColor: Colors.red,
+			textColor: Colors.white,
+			fontSize: 16.0
+		);
+	}
 
     void handleScroll() {
         double position = _controller.position.pixels;
