@@ -11,7 +11,6 @@ class MainModel extends Model {
 
     List<ImageData> photoData = new List<ImageData>();
     int pageNumber = 1;
-    String error;
     Client httpClient;
     bool requesting = false;
 	Connectivity _connectivity;
@@ -44,9 +43,9 @@ class MainModel extends Model {
     }
 
 	Stream<String> get connectionStateStream => _connectionStateChanged.stream;
-	Stream<String> get errorStream => _errorStreamController.stream;
+	Stream<dynamic> get errorStream => _errorStreamController.stream;
 
-
+	@visibleForTesting
     Future<List<ImageData>> getImages(int page)async{
 
         var result;
@@ -105,23 +104,10 @@ class MainModel extends Model {
     }
 
     void displayError(dynamic e){
+		requesting = null;
 		_errorStreamController.add(e);
-        // this.error = e.toString();
-        // notifyListeners();
         print(e);
     }
 
-    void removeError()async{
-        error = null;
-        notifyListeners();
-        try {
-            photoData.addAll(await getImages(pageNumber).timeout(Duration(seconds: 10)));
-            notifyListeners();
-        } catch (e) {
-            displayError(e);
-			sentry.report(e);
-        }
-    }
-    
     static MainModel of(BuildContext context) => ScopedModel.of<MainModel>(context);
 }

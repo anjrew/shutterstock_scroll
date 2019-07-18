@@ -30,7 +30,7 @@ class _SSLoaderState extends State<SSLoader>
                 height: 100,
             );
         } catch (e) {
-            MainModel.of(context).error = e;
+            MainModel.of(context).displayError(e);
             sentry.report(e);
         }
     }
