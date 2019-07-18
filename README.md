@@ -6,7 +6,7 @@ This is a mobile application that gets images from the Shutterstock api with inf
 
 - The solution is to get a small selection of the most recent images and display them.
 
-- When it is necessary we should fetch more images. In this case of a scrollable list we will fetch more images when the user has scrolled to the end of the list.
+- When it is necessary we should fetch more images. In this case of a scrollable list, we will fetch more images when the user has scrolled to the end of the list.
 
 - To do this wee need to fire a callback function that is trigged by the user reaching the end of the list.
 
@@ -18,12 +18,11 @@ This is a mobile application that gets images from the Shutterstock api with inf
 
 - Each time including the first we get 10 images. This is enough to fill most screens with an initial set of images. 
 
-- The Shutterstock endpoint to get more images takes a query of the amount of images with each call(Images per page) and what page number you would like.
+- The Shutterstock endpoint to get more images, takes a query of the amount of images with each call(Images per page) and what page number you would like.
 
 - To make sure we keep getting the next page on each call, there is a integer in the main scoped mondel object that relates to the page number to call for. It starts at 0 on initialisation and with each call is incremented up by one. This makes sure on the next call the next batch(next page) of images is requested. 
 
 - When the images are returned in the response, the existing array of displayed images and the new array from the response are reduced into one and the lisview is populated with the new data.
-
 
 ## Design choice
 
@@ -31,7 +30,6 @@ This is a mobile application that gets images from the Shutterstock api with inf
 
 - I wanted to abstract my logic from my UI for clean elegant code so this was a perfect solution. 
 There are not so many components relying on data change so a Bloc pattern with streams in my opion was not suitable and would be over engineering. Being a small application Redux was also going to be overkill here.
-
 
 ## Packages used.
 
@@ -53,12 +51,10 @@ Becasue the application relies so much on the internet, this package is used to 
 **fluttertoast: ^3.1.0**
 This package is used to notify the user of any acivities or state changes within the app. In this case it notifies the user when internet connection is lost.
 
-
 ## Tests
 - Unit and widget tests are carried out on all components.
 - Golden tests implemented on all widgets.
 - Driver tests are not working correctly. See issues below.
-
 
 ## Workflow
 
@@ -67,7 +63,6 @@ This package is used to notify the user of any acivities or state changes within
 
 **CICD**
 - CICD workflow with NeverCode's Codemagic CICD tool is setup to run tests every time commits are pushed to this git repo. subscribers are notifed with the results of the test by email or slack.
-
 
 ## UI
 
