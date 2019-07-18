@@ -71,7 +71,7 @@ This package is used to notify the user of any acivities or state changes within
 
 - Slivers and a custom scrollview are implemented to make the app bar disappear on scolling. This maximises the viewport and gives the user the best experience.
 
-**Animations
+**Animations**
 - Hero animations are used to guide the user from the gallery to the image.
 - The initial loading animation is used with a continuous rotation transition.
 
