@@ -55,7 +55,9 @@ This package is used to notify the user of any acivities or state changes within
 
 
 ## Tests
-- Unit and widget tests are carried out on all components
+- Unit and widget tests are carried out on all components.
+- Golden tests implemented on all widgets.
+- Driver tests are not working correctly. See issues below.
 
 
 ## Workflow
@@ -72,14 +74,15 @@ This package is used to notify the user of any acivities or state changes within
 - Slivers and a custom scrollview are implemented to make the app bar disappear on scolling. This maximises the viewport and gives the user the best experience.
 
 **Animations**
-- Hero animations are used to guide the user from the gallery to the image.
+- Hero animations are used to guide the user from the gallery to the full image view.
 - The initial loading animation is used with a continuous rotation transition.
 
 ## Issues
-- When trying to load a project file as mock JSON data an error was thrown. I raised an issue on the flutter GitHub project as no clear solution was given in the documentation and no solutions where on google searches or stack overflow. https://github.com/flutter/flutter/issues/35740.
+- When trying to load a project file as mock JSON data an error was thrown. An issue is raised on the flutter GitHub project as no clear solution was given in the documentation and no solutions where on google searches or stack overflow. https://github.com/flutter/flutter/issues/35740.
 
-- Flutter driver was not corretly locating the widgets with the SerializableFinder class. I rasied an issue on Github as I could fin no solutions or topics on the rest of the web. https://github.com/flutter/flutter/issues/36244
+- Flutter driver was not corrcetly locating the widgets with the SerializableFinder class. An issue is raised on the flutter GitHub project as no solutions or topics on the rest of the web could be found. https://github.com/flutter/flutter/issues/36244.
 
+- When doing tests a error appears in the logs related the the "connectivity" package. An issue is raised on the flutter GitHub project https://github.com/flutter/flutter/issues/36440.
 
 ## Check out my page for my CV and general things about me
 https://a-johnson-developer-berlin.herokuapp.com/
