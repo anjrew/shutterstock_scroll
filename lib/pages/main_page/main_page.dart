@@ -35,7 +35,7 @@ class _MainPageState extends State<MainPage> {
                         slivers: <Widget>[
                             MainAppBar(),
                             GalleryList(),
-                            SliverToBoxAdapter(child: logic.requesting == null
+                            SliverToBoxAdapter(child: logic.requesting == true
                                             ? LinearProgressIndicator()
                                             : Container()),
                         ],
@@ -50,13 +50,15 @@ class _MainPageState extends State<MainPage> {
         		builder: (BuildContext context) => ErrorMessageWidget(
                         message: error.toString(),
                         okAction: removeErrorDiolog),
-		);
+		    );
     }
 
-	void removeErrorDiolog(){
-		MainModel.of(context).getMoreImages();
-		Navigator.of(context, rootNavigator: true).pop();
-	}
+    void removeErrorDiolog(){
+		    MainModel.of(context).getMoreImages();
+			if(Navigator.of(context).canPop()){
+				Navigator.of(context).pop();
+			}
+	  }
 
     void showConnectionStatus(String status) {
         Fluttertoast.showToast(

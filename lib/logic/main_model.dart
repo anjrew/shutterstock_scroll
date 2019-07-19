@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:http/http.dart';
@@ -27,17 +28,15 @@ class MainModel extends Model {
                 notifyListeners();
             })
             .timeout(Duration(seconds: 10))
-            .catchError((e) { 
-                displayError(e);
-				sentry.report(e);
+            .catchError((e) {
+				handleSsErrors(e);
             });
 			_errorStreamController = new StreamController<dynamic>.broadcast();
 			_connectionStateChanged = new StreamController<String>.broadcast();
 			_connectivity = Connectivity();
 			_connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
-			    // Got a new connectivity status!
 				if (result == ConnectivityResult.none){
-					_connectionStateChanged.add("You have no internet connection");
+					_connectionStateChanged.add("You lost the internet connection.");
 				}
 			});
     }
@@ -77,8 +76,7 @@ class MainModel extends Model {
                     throw Exception('The GET request failed with code ${response.statusCode}');
                 }
             } catch (e) {
-                displayError(e);
-				sentry.report(e);
+                handleSsErrors(e);
             }
         }
         return result ?? List<ImageData>();
@@ -89,8 +87,7 @@ class MainModel extends Model {
             photoData.addAll(await getImages(pageNumber).timeout(Duration(seconds: 10)));
             notifyListeners();
         } catch (e) {
-            displayError(e);
-			sentry.report(e);
+            handleSsErrors(e);
         }
     }
 
@@ -103,9 +100,18 @@ class MainModel extends Model {
         ).toList();
     }
 
+	void handleSsErrors(dynamic error){
+		if (error is SocketException){
+			displayError('There is a problem with the internet connection.');
+		} else {
+			displayError('There was a problem getting the images from Shutterstock.');
+		}
+	}
+
     void displayError(dynamic e){
-		requesting = null;
+		requesting = false;
 		_errorStreamController.add(e);
+		sentry.report(e);
         print(e);
     }
 

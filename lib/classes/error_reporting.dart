@@ -9,13 +9,11 @@ SentryClient setupCrashReporting(){
 }
 
 void report(dynamic error){
+	print(error);
 	try {
-		_sentry.captureException(
-		exception: error,
-		stackTrace: error.stackTrance)
-		.catchError((e) => print('Could not report error to Sentry: $e'));
+		_sentry.capture(event: error)
+			.catchError((e) => print('Could not report error to Sentry: $e'));
 	} catch (e) {
 		print(e);
 	}
-	
 }
