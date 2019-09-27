@@ -49,7 +49,6 @@ void main() async {
   final model = MainModel(httpClient: mockHttp);
 
   test('Get more images increments', () async {
-      
     List<ImageData> mockedResult = await model.getImages(1);
 
     expect(

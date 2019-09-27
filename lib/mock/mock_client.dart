@@ -2,7 +2,7 @@ import 'package:http/testing.dart';
 import 'package:http/http.dart';
 
 Client mockHttp = MockClient((request) async {
-    return Response('''
+  return Response('''
                   {
                     "data": [
                         {
@@ -35,4 +35,4 @@ Client mockHttp = MockClient((request) async {
                     ]
                 }
             ''', 200);
-  });
+});
